@@ -68,9 +68,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 label: 'Register',
                 color: Colors.blueAccent,
                 onPressed: () async {
-                  print(this.email);
-                  print(this.password);
-
                   try {
                     final new_user = await _auth.createUserWithEmailAndPassword(
                         email: this.email, password: this.password);

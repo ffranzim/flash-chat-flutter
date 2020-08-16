@@ -4,6 +4,7 @@ import 'package:flash_chat/constants.dart';
 
 class ChatScreen extends StatefulWidget {
   static String id = 'chat_screen';
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -18,7 +19,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
       if (user != null) {
         this.loggedInUser = user;
-        print(this.loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -40,7 +40,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-                //Implement logout functionality
+                _auth.signOut();
+                Navigator.pop(context);
               }),
         ],
         title: Text('⚡️Chat'),
