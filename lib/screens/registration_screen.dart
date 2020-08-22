@@ -27,74 +27,73 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         inAsyncCall: this.showSpinner,
         child: Padding(
           padding: EdgeInsets.all(24.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Hero(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Flexible(
+                child: Hero(
                   tag: 'logo',
                   child: Container(
                     height: 200.0,
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                SizedBox(
-                  height: 48.0,
+              ),
+              SizedBox(
+                height: 48.0,
+              ),
+              TextField(
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.emailAddress,
+                onChanged: (value) {
+                  this.email = value;
+                },
+                decoration: kTextFieldInputDecoration.copyWith(
+                  hintText: 'Enter your email',
                 ),
-                TextField(
-                  textAlign: TextAlign.center,
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {
-                    this.email = value;
-                  },
-                  decoration: kTextFieldInputDecoration.copyWith(
-                    hintText: 'Enter your email',
-                  ),
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              TextField(
+                textAlign: TextAlign.center,
+                obscureText: true,
+                onChanged: (value) {
+                  this.password = value;
+                },
+                decoration: kTextFieldInputDecoration.copyWith(
+                  hintText: 'Enter your password',
                 ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                TextField(
-                  textAlign: TextAlign.center,
-                  obscureText: true,
-                  onChanged: (value) {
-                    this.password = value;
-                  },
-                  decoration: kTextFieldInputDecoration.copyWith(
-                    hintText: 'Enter your password',
-                  ),
-                ),
-                SizedBox(
-                  height: 24.0,
-                ),
-                RoundedButton(
-                  label: 'Register',
-                  color: Colors.blueAccent,
-                  onPressed: () async {
-                    try {
-                      setState(() {
-                        this.showSpinner = true;
-                      });
+              ),
+              SizedBox(
+                height: 24.0,
+              ),
+              RoundedButton(
+                label: 'Register',
+                color: Colors.blueAccent,
+                onPressed: () async {
+                  try {
+                    setState(() {
+                      this.showSpinner = true;
+                    });
 
-                      final new_user =
-                          await _auth.createUserWithEmailAndPassword(
-                              email: this.email, password: this.password);
+                    final new_user = await _auth.createUserWithEmailAndPassword(
+                        email: this.email, password: this.password);
 
-                      if (new_user != null) {
-                        Navigator.pushNamed(context, ChatScreen.id);
-                      }
-
-                      setState(() {
-                        this.showSpinner = false;
-                      });
-                    } catch (e) {
-                      print(e);
+                    if (new_user != null) {
+                      Navigator.pushNamed(context, ChatScreen.id);
                     }
-                  },
-                )
-              ],
-            ),
+
+                    setState(() {
+                      this.showSpinner = false;
+                    });
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              )
+            ],
           ),
         ),
       ),
